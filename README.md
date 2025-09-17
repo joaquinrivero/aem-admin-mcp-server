@@ -1,246 +1,163 @@
 # AEM Admin MCP Server
 
-A Model Context Protocol (MCP) server that enables AI assistants like Claude Code and Cursor AI to interact with Adobe Experience Manager (AEM) Live Admin API for content management, publishing, and administrative tasks.
+Connect your AI assistant (Claude Code or Cursor AI) directly to Adobe Experience Manager (AEM) Live for seamless content management. Publish pages, generate previews, manage cache, and create backups - all through natural conversation with your AI.
 
-## Features
+## What You Can Do
 
-- **Content Publishing**: Publish content to AEM Live with force update and bulk options (also refreshes cache)
-- **Content Preview**: Generate content previews for testing and validation
-- **Cache Management**: Invalidate cache entries (Note: publishing content also refreshes cache automatically)
-- **Sitemap Generation**: Create and update sitemaps for AEM Live sites
-- **Snapshot Management**: Create content snapshots for versioning and backup
+- **📤 Publish Content**: Deploy your pages to AEM Live instantly
+- **👀 Preview Changes**: Test your content before going live
+- **🔄 Refresh Cache**: Clear cache to show latest updates
+- **🗺️ Generate Sitemaps**: Create site maps for better SEO
+- **💾 Create Backups**: Save snapshots of your content
 
-## Prerequisites
+## Quick Start
 
-- Node.js 18.0.0 or higher
-- AEM Live instance with Admin API access
-- API authentication credentials (API key or auth token)
+### Step 1: Get Your API Key
+Use our [Universal Setup Tool](setup.html) to get your AEM API key and test the connection.
 
-> **Need an API key?** Use our [Universal Setup Tool](setup.html) which includes API key generation and testing features.
+### Step 2: Install for Your AI Assistant
 
-## Installation
-
-### For Claude Code
-
+**For Claude Code:**
 ```bash
-# Install the server globally
 npm install -g aem-admin-mcp-server
-
-# Add to Claude Code (replace YOUR_API_KEY with your actual AEM API key)
 claude mcp add aem-admin --env AEM_API_KEY=YOUR_API_KEY --env AEM_BASE_URL=https://admin.hlx.page -- aem-admin-mcp-server
 ```
 
-### For Cursor AI
+**For Cursor AI:**
+1. Open the [Universal Setup Tool](setup.html)
+2. Enter your AEM API Key
+3. Click "📱 Add to Cursor (One-Click)" to automatically configure Cursor
+4. Cursor will open and prompt you to add the MCP server
 
-Follow the [official Cursor MCP setup guide](https://docs.cursor.com/en/tools/developers) and use this configuration:
+### Step 3: Start Using It!
+Just ask your AI assistant to help with AEM tasks:
+- "Publish the /en/products page for adobecom/milo"
+- "Create a preview for /en/products on adobecom/milo"
+- "Generate a sitemap for adobecom/milo"
+- "Create a backup snapshot for adobecom/milo"
 
-#### Option 1: One-Click Installation (Recommended)
-Open the [Universal Setup Tool](setup.html) in your browser:
-1. Enter your AEM API Key
-2. Click "📱 Add to Cursor (One-Click)" to automatically configure Cursor
-3. Cursor will open and prompt you to add the MCP server
+## How It Works
 
-#### Option 2: Manual Configuration
-Build the project and add this to your Cursor MCP settings (see [Cursor docs](https://docs.cursor.com/en/tools/developers) for setup location):
+This tool connects your AI assistant to AEM Live through a simple bridge. When you ask your AI to "publish a page," it automatically:
 
-```bash
-# Build the project
-npm install
-npm run build
-```
+1. **Understands** your request in natural language
+2. **Translates** it to the correct AEM API calls
+3. **Executes** the action on your AEM Live instance
+4. **Reports** back the results in plain English
 
-```json
-{
-  "mcpServers": {
-    "aem-admin": {
-      "command": "node",
-      "args": ["/Users/rivero/ai/mcp/aem-authoring/build/index.js"],
-      "env": {
-        "AEM_API_KEY": "YOUR_API_KEY",
-        "AEM_BASE_URL": "https://admin.hlx.page"
-      }
-    }
-  }
-}
-```
+## Common Tasks
 
-### Development Setup
+### Publishing Content
+Ask your AI: *"Publish the /en/products page for adobecom/milo"*
 
-```bash
-# Clone the repository
-git clone <repository-url>
-cd aem-admin-mcp-server
+**What happens:**
+- Your AI connects to AEM Live
+- Publishes the specified page
+- Refreshes the cache automatically
+- Confirms the page is live
 
-# Install dependencies
-npm install
+### Creating Previews
+Ask your AI: *"Create a preview for /en/products on adobecom/milo"*
 
-# Build the project
-npm run build
+**What happens:**
+- Generates a preview URL
+- Shows you exactly how the page will look
+- Perfect for testing before going live
 
-# Run in development mode
-npm run dev
-```
+### Managing Cache
+Ask your AI: *"Refresh the cache for /en/products on adobecom/milo"*
 
-## Configuration
+**What happens:**
+- Clears the cache for that specific page
+- Ensures visitors see the latest changes
+- Alternative: Just publish the page (cache refreshes automatically)
 
-Configure the server using environment variables:
+### Generating Sitemaps
+Ask your AI: *"Generate a sitemap for adobecom/milo"*
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `AEM_BASE_URL` | AEM Admin API base URL | `https://admin.hlx.page` |
-| `AEM_API_KEY` | API key for authentication | Required |
-| `AEM_AUTH_TOKEN` | Alternative auth token | Optional |
-| `AEM_TIMEOUT` | Request timeout in milliseconds | `30000` |
+**What happens:**
+- Creates a complete sitemap of your site
+- Helps search engines find all your pages
+- Improves SEO automatically
 
-## Available Tools
+### Creating Backups
+Ask your AI: *"Create a backup snapshot named 'pre-release-backup' for adobecom/milo"*
 
-### `publish_content`
-Publish content to AEM Live.
+**What happens:**
+- Saves a snapshot of your current content
+- Creates a restore point before major changes
+- Includes optional description and specific paths
 
-```typescript
-{
-  org: string;           // Organization (e.g., "adobecom")
-  site: string;          // Site repository (e.g., "milo")
-  ref?: string;          // Git branch (default: "main")
-  path: string;          // Content path (e.g., "/en/products")
-  force?: boolean;       // Force update even if up to date
-  bulk?: boolean;        // Use bulk publishing endpoint
-}
-```
+## What You Need
 
-### `preview_content`
-Generate content preview.
+- **AEM Live Access**: Your organization must have AEM Live with Admin API enabled
+- **API Key**: Get this from your AEM administrator or use our [setup tool](setup.html)
+- **AI Assistant**: Claude Code or Cursor AI (both supported)
 
-```typescript
-{
-  org: string;           // Organization (e.g., "adobecom")
-  site: string;          // Site repository (e.g., "milo")
-  ref?: string;          // Git branch (default: "main")
-  path: string;          // Content path (e.g., "/en/products")
-}
-```
+## Troubleshooting
 
-### `invalidate_cache`
-Invalidate AEM Live cache. **Note**: Publishing content automatically refreshes cache, so use `publish_content` if this tool doesn't work.
+### "API Key Invalid" Error
+- Double-check your API key in the [setup tool](setup.html)
+- Ensure your organization has AEM Live Admin API access
+- Contact your AEM administrator if needed
 
-```typescript
-{
-  org: string;           // Organization (e.g., "adobecom")
-  site: string;          // Site repository (e.g., "milo")
-  ref?: string;          // Git branch (default: "main")
-  path: string;          // Content path (e.g., "/en/products")
-}
-```
+### "Page Not Found" Error
+- Verify the organization name (e.g., "adobecom")
+- Check the site repository name (e.g., "milo")
+- Confirm the page path exists (e.g., "/en/products")
 
-### `generate_sitemap`
-Generate sitemap for AEM Live site.
+### Cache Issues
+- Publishing content automatically refreshes cache
+- If cache problems persist, try publishing the page again
+- Use the cache invalidation tool as a last resort
 
-```typescript
-{
-  org: string;           // Organization (e.g., "adobecom")
-  site: string;          // Site repository (e.g., "milo")
-  ref?: string;          // Git branch (default: "main")
-  path?: string;         // Optional specific path
-}
-```
+## Tips for Better Results
 
-### `create_snapshot`
-Create content snapshot.
+### Be Specific
+✅ **Good**: "Publish the /en/products page for adobecom/milo"
+❌ **Vague**: "Publish something"
 
-```typescript
-{
-  org: string;           // Organization (e.g., "adobecom")
-  site: string;          // Site repository (e.g., "milo")
-  name: string;          // Snapshot name
-  description?: string;  // Optional description
-  paths?: string[];      // Optional specific paths
-}
-```
+### Include Context
+✅ **Good**: "Create a preview for /en/products on adobecom/milo main branch"
+❌ **Missing**: "Create preview"
 
-## Usage Examples
+### Use Natural Language
+✅ **Good**: "Generate a sitemap for adobecom/milo"
+❌ **Technical**: "Execute generate_sitemap with org=adobecom, site=milo"
 
-### With Claude Code
+## Advanced Configuration
 
-```bash
-# Publish a specific page for Milo project
-> "Publish the /en/products page for adobecom/milo project"
+If you need to customize the connection settings, you can modify these environment variables:
 
-# Generate a preview
-> "Create a preview for /en/products on adobecom/milo main branch"
+| Setting | What It Does | Default |
+|---------|--------------|---------|
+| `AEM_BASE_URL` | AEM Live server address | `https://admin.hlx.page` |
+| `AEM_API_KEY` | Your authentication key | Required |
+| `AEM_TIMEOUT` | How long to wait for responses | 30 seconds |
 
-# Clear cache for a specific path (or use publish_content as alternative)
-> "Invalidate the cache for /en/products on adobecom/milo"
-> "Publish /en/products on adobecom/milo to refresh cache"
+## Getting Help
 
-# Generate sitemap for Milo
-> "Generate a sitemap for adobecom/milo project"
+### Common Questions
 
-# Create a snapshot
-> "Create a snapshot named 'pre-release-backup' for adobecom/milo"
-```
+**Q: Can I use this with other AI assistants?**
+A: Currently optimized for Claude Code and Cursor AI, but other MCP-compatible assistants should work.
 
-### With Cursor AI
+**Q: What if I don't have an API key?**
+A: Contact your AEM administrator or use our [setup tool](setup.html) to generate one.
 
-Simply ask Cursor AI to perform AEM operations and it will use the available tools automatically.
+**Q: Can I publish multiple pages at once?**
+A: Yes! Ask your AI: "Publish all pages in /en/products for adobecom/milo"
 
-## Testing
+**Q: Is my data secure?**
+A: Yes, all communication uses HTTPS and your API key is stored securely on your device.
 
-```bash
-# Run tests
-npm test
+### Need More Help?
 
-# Run tests with coverage
-npm test:coverage
+- **Setup Issues**: Use our [Universal Setup Tool](setup.html) for guided configuration
+- **Technical Problems**: Check the troubleshooting section above
+- **Feature Requests**: Open an issue in the repository
+- **General Questions**: Contact your AEM administrator
 
-# Test with MCP Inspector
-npx @modelcontextprotocol/inspector node build/index.js
-```
+---
 
-## Development
-
-### Code Structure
-
-The project follows modular design principles:
-
-- `src/tools/` - Individual tool implementations (<50 lines each)
-- `src/utils/` - Shared utilities (HTTP client, logger, validation)
-- `src/auth/` - Authentication management
-- `src/config/` - Configuration management
-- `src/types/` - TypeScript type definitions
-
-### Core Principles
-
-- **KISS**: Keep It Simple - single-purpose tools with clear naming
-- **YAGNI**: You Aren't Gonna Need It - essential features only
-- **DRY**: Don't Repeat Yourself - shared utilities for common patterns
-
-### File Limits
-
-- Functions: <50 lines
-- Classes: <100 lines
-- Files: <500 lines
-
-## Error Handling
-
-The server includes comprehensive error handling:
-
-- Input validation using Zod schemas
-- HTTP request/response error handling
-- Structured logging for debugging
-- Graceful error responses to MCP clients
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Follow the coding standards (ESLint configuration provided)
-4. Add tests for new functionality
-5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details.
-
-## Support
-
-For issues and feature requests, please open an issue in the repository.
+**Ready to get started?** Use our [Universal Setup Tool](setup.html) to set up your API key and start managing AEM content with your AI assistant!
