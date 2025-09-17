@@ -1,0 +1,1 @@
+export * from './aem_config.js';

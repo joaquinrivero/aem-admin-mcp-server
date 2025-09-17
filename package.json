@@ -1,0 +1,48 @@
+{
+  "name": "aem-admin-mcp-server",
+  "version": "0.1.0",
+  "description": "Model Context Protocol server for Adobe Experience Manager (AEM) Admin API integration",
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "aem-admin-mcp-server": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias && node scripts/post-build.cjs",
+    "dev": "tsx src/index.ts",
+    "prepare": "npm run build",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:server": "node scripts/test-server.cjs",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "aem",
+    "adobe-experience-manager",
+    "content-management",
+    "claude-code",
+    "cursor-ai"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

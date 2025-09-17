@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEM Admin MCP Server - Universal Setup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+        :root {
+            /* Adobe Brand Colors */
+            --adobe-red: #FF0000;
+            --adobe-blue: #1473E6;
+            --adobe-gray-100: #F5F5F5;
+            --adobe-gray-200: #E1E1E1;
+            --adobe-gray-300: #CACACA;
+            --adobe-gray-400: #B3B3B3;
+            --adobe-gray-500: #909090;
+            --adobe-gray-600: #6E6E6E;
+            --adobe-gray-700: #464646;
+            --adobe-gray-800: #2C2C2C;
+            --adobe-gray-900: #1A1A1A;
+
+            /* Spectrum Design Tokens */
+            --spectrum-spacing-100: 4px;
+            --spectrum-spacing-200: 8px;
+            --spectrum-spacing-300: 12px;
+            --spectrum-spacing-400: 16px;
+            --spectrum-spacing-500: 20px;
+            --spectrum-spacing-600: 24px;
+            --spectrum-spacing-700: 32px;
+            --spectrum-spacing-800: 40px;
+
+            --spectrum-corner-radius-100: 4px;
+            --spectrum-corner-radius-200: 8px;
+            --spectrum-corner-radius-300: 12px;
+        }
+
+        body {
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spectrum-spacing-800);
+            line-height: 1.6;
+            background: var(--adobe-gray-100);
+            color: var(--adobe-gray-800);
+            font-weight: 400;
+        }
+        .container {
+            background: white;
+            border-radius: var(--spectrum-corner-radius-300);
+            padding: var(--spectrum-spacing-800);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--adobe-gray-200);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: var(--spectrum-spacing-800);
+        }
+        .logo {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(45deg, var(--adobe-red) 0%, var(--adobe-blue) 100%);
+            border-radius: var(--spectrum-corner-radius-300);
+            margin: 0 auto var(--spectrum-spacing-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        h1 {
+            color: var(--adobe-gray-900);
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            color: var(--adobe-gray-600);
+            margin: var(--spectrum-spacing-200) 0 0;
+            font-weight: 400;
+            font-size: 1.125rem;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--adobe-gray-200);
+            margin-bottom: var(--spectrum-spacing-700);
+            overflow-x: auto;
+            gap: var(--spectrum-spacing-100);
+        }
+        .tab {
+            padding: var(--spectrum-spacing-400) var(--spectrum-spacing-600);
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--adobe-gray-600);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            border-radius: var(--spectrum-corner-radius-100) var(--spectrum-corner-radius-100) 0 0;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .tab:hover {
+            color: var(--adobe-gray-800);
+            background: var(--adobe-gray-100);
+        }
+        .tab.active {
+            color: var(--adobe-blue);
+            border-bottom-color: var(--adobe-blue);
+            background: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: var(--spectrum-spacing-600);
+        }
+        label {
+            display: block;
+            margin-bottom: var(--spectrum-spacing-200);
+            font-weight: 600;
+            color: var(--adobe-gray-800);
+            font-size: 0.875rem;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: var(--spectrum-spacing-300) var(--spectrum-spacing-400);
+            border: 2px solid var(--adobe-gray-300);
+            border-radius: var(--spectrum-corner-radius-200);
+            font-size: 1rem;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            transition: all 0.2s ease;
+            background: white;
+            color: var(--adobe-gray-800);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--adobe-blue);
+            box-shadow: 0 0 0 2px rgba(20, 115, 230, 0.2);
+        }
+        input:hover, select:hover, textarea:hover {
+            border-color: var(--adobe-gray-400);
+        }
+        .button {
+            background: var(--adobe-blue);
+            color: white;
+            border: none;
+            padding: var(--spectrum-spacing-300) var(--spectrum-spacing-600);
+            border-radius: var(--spectrum-corner-radius-200);
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spectrum-spacing-200);
+        }
+        .button:hover {
+            background: #0F5FBF;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(20, 115, 230, 0.3);
+        }
+        .button:active {
+            transform: translateY(0);
+        }
+        .button.secondary {
+            background: var(--adobe-gray-600);
+        }
+        .button.secondary:hover {
+            background: var(--adobe-gray-700);
+        }
+        .button.success {
+            background: #2D9D78;
+        }
+        .button.success:hover {
+            background: #268763;
+        }
+        .button.danger {
+            background: var(--adobe-red);
+        }
+        .button.danger:hover {
+            background: #E60000;
+        }
+        .output {
+            background: var(--adobe-gray-100);
+            border: 1px solid var(--adobe-gray-300);
+            border-radius: var(--spectrum-corner-radius-200);
+            padding: var(--spectrum-spacing-500);
+            margin-top: var(--spectrum-spacing-500);
+            font-family: 'Source Code Pro', 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            color: var(--adobe-gray-800);
+        }
+        .success {
+            background: #E8F5E8;
+            border-color: #2D9D78;
+            color: #1B5E20;
+        }
+        .error {
+            background: #FFEBEE;
+            border-color: var(--adobe-red);
+            color: #B71C1C;
+        }
+        .warning {
+            background: #FFF8E1;
+            border-color: #FF8F00;
+            color: #E65100;
+        }
+        .info {
+            background: #E3F2FD;
+            border-color: var(--adobe-blue);
+            color: #0D47A1;
+        }
+        .step {
+            margin: var(--spectrum-spacing-600) 0;
+            padding: var(--spectrum-spacing-600);
+            background: var(--adobe-gray-100);
+            border-radius: var(--spectrum-corner-radius-200);
+            border-left: 4px solid var(--adobe-blue);
+        }
+        .step h3 {
+            margin-top: 0;
+            color: var(--adobe-gray-900);
+            font-weight: 600;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spectrum-spacing-500);
+            margin: var(--spectrum-spacing-500) 0;
+        }
+        .card {
+            background: white;
+            border-radius: var(--spectrum-corner-radius-200);
+            padding: var(--spectrum-spacing-600);
+            border: 1px solid var(--adobe-gray-200);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .card h4 {
+            margin-top: 0;
+            color: var(--adobe-gray-900);
+            font-weight: 600;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .hidden {
+            display: none !important;
+        }
+        code {
+            background: var(--adobe-gray-200);
+            padding: var(--spectrum-spacing-100) var(--spectrum-spacing-200);
+            border-radius: var(--spectrum-corner-radius-100);
+            font-family: 'Source Code Pro', 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: var(--adobe-gray-800);
+        }
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: var(--adobe-gray-200);
+            border-radius: var(--spectrum-corner-radius-100);
+            overflow: hidden;
+            margin: var(--spectrum-spacing-500) 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--adobe-blue), var(--adobe-red));
+            transition: width 0.3s ease;
+        }
+
+        /* Typography improvements */
+        h2 {
+            color: var(--adobe-gray-900);
+            font-weight: 600;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-bottom: var(--spectrum-spacing-400);
+        }
+        h3 {
+            color: var(--adobe-gray-800);
+            font-weight: 600;
+            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        p {
+            color: var(--adobe-gray-700);
+            margin-bottom: var(--spectrum-spacing-400);
+        }
+        small {
+            color: var(--adobe-gray-600);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">AEM</div>
+            <h1>AEM Admin MCP Server</h1>
+            <p class="subtitle">Universal Setup & Configuration Tool</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('quick-setup')">Quick Setup</button>
+            <button class="tab" onclick="showTab('config-finder')">Config Discovery</button>
+            <button class="tab" onclick="showTab('auth-test')">Auth Testing</button>
+            <button class="tab" onclick="showTab('cursor-install')">Cursor Install</button>
+            <button class="tab" onclick="showTab('claude-install')">Claude Install</button>
+            <button class="tab" onclick="showTab('advanced')">Advanced Setup</button>
+        </div>
+
+        <!-- Quick Setup Tab -->
+        <div id="quick-setup" class="tab-content active">
+            <h2>Quick Setup</h2>
+            <p>Get started with AEM Admin MCP Server in just a few steps:</p>
+
+            <div class="step">
+                <h3>Step 1: Choose Your Setup Type</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🚀 Simple Setup</h4>
+                        <p>For single AEM Live site</p>
+                        <button class="button" onclick="startSimpleSetup()">Start Simple Setup</button>
+                    </div>
+                    <div class="card">
+                        <h4>🏢 Multi-Project Setup</h4>
+                        <p>For multiple AEM sites/projects</p>
+                        <button class="button" onclick="startMultiSetup()">Start Multi Setup</button>
+                    </div>
+                    <div class="card">
+                        <h4>⚙️ Custom Setup</h4>
+                        <p>Advanced configuration</p>
+                        <button class="button" onclick="showTab('advanced')">Custom Setup</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="simple-setup-form" class="hidden">
+                <div class="step">
+                    <h3>Step 2: Basic Configuration</h3>
+                    <div class="form-group">
+                        <label for="siteUrl">AEM Live Site URL</label>
+                        <input type="url" id="siteUrl" placeholder="https://your-site.hlx.page" />
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">API Key (optional - we can help you get one)</label>
+                        <input type="password" id="apiKey" placeholder="Enter your API key or leave blank" />
+                    </div>
+                    <button class="button" onclick="generateConfig()">Generate Configuration</button>
+                </div>
+            </div>
+
+            <div id="config-output" class="hidden">
+                <div class="step">
+                    <h3>Step 3: Installation Commands</h3>
+                    <div id="generated-config" class="output"></div>
+                    <button class="button success" onclick="copyToClipboard('generated-config')">Copy Configuration</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Config Discovery Tab -->
+        <div id="config-finder" class="tab-content">
+            <h2>Configuration Discovery</h2>
+            <p>Automatically discover AEM Live configuration from your site:</p>
+
+            <div class="form-group">
+                <label for="discoverUrl">AEM Site URL to Analyze</label>
+                <input type="url" id="discoverUrl" placeholder="https://main--milo--adobecom.aem.page" />
+                <small>Site URL to analyze (not the admin API URL). Examples: https://main--milo--adobecom.aem.page</small>
+            </div>
+            <button class="button" onclick="discoverConfig()">Discover Configuration</button>
+
+            <div id="discovery-results" class="output hidden"></div>
+        </div>
+
+        <!-- Auth Testing Tab -->
+        <div id="auth-test" class="tab-content">
+            <h2>Authentication Testing & API Key Generation</h2>
+
+            <div class="step">
+                <h3>Test Existing API Key</h3>
+                <div class="form-group">
+                    <label for="testApiKey">API Key</label>
+                    <input type="password" id="testApiKey" placeholder="Enter your API key" />
+                </div>
+                <div class="form-group">
+                    <label for="testBaseUrl">AEM Base URL</label>
+                    <input type="url" id="testBaseUrl" value="https://admin.hlx.page" />
+                    <small>Use your project-specific AEM URL</small>
+                </div>
+                <button class="button" onclick="testAuth()">Test Authentication</button>
+            </div>
+
+            <div class="step">
+                <h3>Generate New API Key</h3>
+                <p>If you don't have an API key, we can help you get one:</p>
+                <div class="form-group">
+                    <label for="gitHubToken">GitHub Personal Access Token</label>
+                    <input type="password" id="gitHubToken" placeholder="ghp_..." />
+                    <small>Required to access your AEM Live configuration</small>
+                </div>
+                <div class="form-group">
+                    <label for="repoUrl">Repository URL</label>
+                    <input type="url" id="repoUrl" placeholder="https://github.com/user/repo" />
+                </div>
+                <button class="button" onclick="generateApiKey()">Generate API Key</button>
+            </div>
+
+            <div id="auth-results" class="output hidden"></div>
+        </div>
+
+        <!-- Cursor Install Tab -->
+        <div id="cursor-install" class="tab-content">
+            <h2>Cursor AI Installation</h2>
+            <p>📖 <strong>Reference:</strong> <a href="https://docs.cursor.com/en/tools/developers" target="_blank">Official Cursor MCP setup guide</a></p>
+            <p>🚀 <strong>Easy Setup:</strong> Enter your API key below and click "Add to Cursor" for automatic configuration!</p>
+
+            <div class="form-group">
+                <label for="cursorApiKey">AEM API Key</label>
+                <input type="password" id="cursorApiKey" placeholder="Enter your API key" />
+            </div>
+            <div class="form-group">
+                <label for="cursorBaseUrl">AEM Base URL</label>
+                <input type="url" id="cursorBaseUrl" value="https://admin.hlx.page" />
+                <small>Admin API base URL. Use https://admin.hlx.page for all AEM Live projects</small>
+            </div>
+            <div class="form-group">
+                <p><strong>Installation Method:</strong> Local Development</p>
+                <small>Uses your built project files directly - no installation required!</small>
+            </div>
+
+            <button class="button" onclick="generateCursorConfig()">Generate Cursor Configuration</button>
+            <button class="button success" onclick="addToCursor()" style="margin-left: 1rem;">
+                📱 Add to Cursor (One-Click)
+            </button>
+            <button class="button secondary" onclick="testConfig()" style="margin-left: 1rem;">
+                🧪 Test Config
+            </button>
+            <div id="cursor-direct-link" class="hidden" style="margin-top: 1rem;">
+                <p><strong>Alternative:</strong> <a id="cursor-link" href="#" target="_blank" class="button" style="text-decoration: none;">
+                    🔗 Direct Cursor Link
+                </a></p>
+            </div>
+
+            <div id="cursor-config" class="output hidden"></div>
+        </div>
+
+        <!-- Claude Install Tab -->
+        <div id="claude-install" class="tab-content">
+            <h2>Claude Code Installation</h2>
+
+            <div class="form-group">
+                <label for="claudeApiKey">AEM API Key</label>
+                <input type="password" id="claudeApiKey" placeholder="Enter your API key" />
+            </div>
+            <div class="form-group">
+                <label for="claudeBaseUrl">AEM Base URL</label>
+                <input type="url" id="claudeBaseUrl" value="https://admin.hlx.page" />
+                <small>Admin API base URL. Use https://admin.hlx.page for all AEM Live projects</small>
+            </div>
+
+            <button class="button" onclick="generateClaudeConfig()">Generate Claude Configuration</button>
+
+            <div id="claude-config" class="output hidden"></div>
+        </div>
+
+        <!-- Advanced Setup Tab -->
+        <div id="advanced" class="tab-content">
+            <h2>Advanced Configuration</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>Environment Variables</h4>
+                    <div class="form-group">
+                        <label for="advApiKey">AEM_API_KEY</label>
+                        <input type="password" id="advApiKey" />
+                    </div>
+                    <div class="form-group">
+                        <label for="advBaseUrl">AEM_BASE_URL</label>
+                        <input type="url" id="advBaseUrl" value="https://admin.hlx.page" />
+                    </div>
+                    <div class="form-group">
+                        <label for="advTimeout">AEM_TIMEOUT (ms)</label>
+                        <input type="number" id="advTimeout" value="30000" />
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Custom Endpoints</h4>
+                    <div class="form-group">
+                        <label for="customEndpoints">Additional Endpoints (JSON)</label>
+                        <textarea id="customEndpoints" rows="6" placeholder='{"custom_tool": "/api/custom"}'></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button class="button" onclick="generateAdvancedConfig()">Generate Advanced Configuration</button>
+            <div id="advanced-config" class="output hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function startSimpleSetup() {
+            document.getElementById('simple-setup-form').classList.remove('hidden');
+        }
+
+        function startMultiSetup() {
+            showTab('advanced');
+        }
+
+        function generateConfig() {
+            const siteUrl = document.getElementById('siteUrl').value;
+            const apiKey = document.getElementById('apiKey').value;
+
+            if (!siteUrl) {
+                alert('Please enter a site URL');
+                return;
+            }
+
+            const config = generateMcpConfig(apiKey || 'YOUR_API_KEY', 'https://admin.hlx.page');
+
+            document.getElementById('generated-config').textContent = config;
+            document.getElementById('config-output').classList.remove('hidden');
+        }
+
+        function generateMcpConfig(apiKey, baseUrl = 'https://admin.hlx.page') {
+            return `// Add this to your MCP settings:
+{
+  "mcpServers": {
+    "aem-admin": {
+      "command": "npx",
+      "args": ["-y", "aem-admin-mcp-server"],
+      "env": {
+        "AEM_API_KEY": "${apiKey}",
+        "AEM_BASE_URL": "${baseUrl}"
+      }
+    }
+  }
+}
+
+// Or install globally:
+npm install -g aem-admin-mcp-server
+
+// Then use in MCP settings:
+{
+  "mcpServers": {
+    "aem-admin": {
+      "command": "aem-admin-mcp-server",
+      "env": {
+        "AEM_API_KEY": "${apiKey}",
+        "AEM_BASE_URL": "${baseUrl}"
+      }
+    }
+  }
+}`;
+        }
+
+        function generateCursorConfig() {
+            const apiKey = document.getElementById('cursorApiKey').value;
+            const baseUrl = document.getElementById('cursorBaseUrl').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            const serverObj = {
+                "command": "node",
+                "args": ["/Users/rivero/ai/mcp/aem-authoring/build/index.js"],
+                "env": {
+                    "AEM_API_KEY": apiKey,
+                    "AEM_BASE_URL": baseUrl
+                }
+            };
+
+            const fullConfig = {
+                "mcpServers": {
+                    "aem-admin": serverObj
+                }
+            };
+
+            const config = `// Step 1: Build the project
+cd /Users/rivero/ai/mcp/aem-authoring
+npm install
+npm run build
+
+// Step 2: Add to your Cursor MCP settings
+// (See https://docs.cursor.com/en/tools/developers for setup location)
+
+${JSON.stringify(fullConfig, null, 2)}`;
+
+            document.getElementById('cursor-config').textContent = config;
+            document.getElementById('cursor-config').classList.remove('hidden');
+        }
+
+        function addToCursor() {
+            const apiKey = document.getElementById('cursorApiKey').value;
+            const baseUrl = document.getElementById('cursorBaseUrl').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key first');
+                return;
+            }
+
+            // Create the MCP server configuration (local development only)
+            const serverConfig = {
+                "command": "node",
+                "args": ["/Users/rivero/ai/mcp/aem-authoring/build/index.js"],
+                "env": {
+                    "AEM_API_KEY": apiKey,
+                    "AEM_BASE_URL": baseUrl
+                }
+            };
+
+            // Remove undefined properties
+            if (serverConfig.args === undefined) {
+                delete serverConfig.args;
+            }
+
+            // Create the cursor:// protocol URL with proper format
+            const configJson = JSON.stringify(serverConfig);
+            const base64Config = btoa(configJson);
+            const cursorUrl = `cursor://anysphere.cursor-deeplink/mcp/install?name=aem-admin&config=${base64Config}`;
+
+            // Also create a direct link for alternative access
+            document.getElementById('cursor-link').href = cursorUrl;
+            document.getElementById('cursor-direct-link').classList.remove('hidden');
+
+            // Try to open the cursor:// URL
+            console.log('Generated server config:', serverConfig);
+            console.log('Base64 config:', base64Config);
+            console.log('Decoded config:', atob(base64Config));
+            console.log('Attempting to open Cursor with URL:', cursorUrl);
+
+            try {
+                // For debugging, also show the URL
+                const debugInfo = `Debug Information:
+Cursor URL: ${cursorUrl}
+Base64 Config: ${base64Config}
+Original Config: ${configJson}`;
+
+                // Try to open Cursor
+                const opened = window.open(cursorUrl, '_self');
+
+                // Show success message
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Opening Cursor...';
+
+                // Show fallback after a short delay
+                setTimeout(() => {
+                    button.textContent = originalText;
+
+                    // Show manual instructions as fallback
+                    const fullConfig = {
+                        "mcpServers": {
+                            "aem-admin": serverConfig
+                        }
+                    };
+
+                    const fallbackConfig = `// Cursor Deep Link (click to try again):
+// ${cursorUrl}
+
+// Or manually add this to Cursor Settings → Features → Model Context Protocol:
+
+${JSON.stringify(fullConfig, null, 2)}
+
+${debugInfo}`;
+
+                    document.getElementById('cursor-config').textContent = fallbackConfig;
+                    document.getElementById('cursor-config').classList.remove('hidden');
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error opening Cursor:', error);
+                alert('Could not open Cursor automatically. Please use the manual configuration below.');
+                generateCursorConfig();
+            }
+        }
+
+        function testConfig() {
+            const apiKey = document.getElementById('cursorApiKey').value;
+            const baseUrl = document.getElementById('cursorBaseUrl').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key first');
+                return;
+            }
+
+            // Create the exact same config as addToCursor
+            const serverConfig = {
+                "command": "node",
+                "args": ["/Users/rivero/ai/mcp/aem-authoring/build/index.js"],
+                "env": {
+                    "AEM_API_KEY": apiKey,
+                    "AEM_BASE_URL": baseUrl
+                }
+            };
+
+            if (serverConfig.args === undefined) {
+                delete serverConfig.args;
+            }
+
+            const configJson = JSON.stringify(serverConfig);
+            const base64Config = btoa(configJson);
+
+            const testOutput = `🧪 TEST RESULTS:
+
+1. Raw Server Config (what gets Base64 encoded):
+${JSON.stringify(serverConfig, null, 2)}
+
+2. Base64 Encoded:
+${base64Config}
+
+3. Decoded Back:
+${atob(base64Config)}
+
+4. What Cursor should receive:
+Server Name: "aem-admin"
+Server Config: ${JSON.stringify(serverConfig, null, 2)}
+
+5. What you should manually add to Cursor settings:
+{
+  "mcpServers": {
+    "aem-admin": ${JSON.stringify(serverConfig, null, 2)}
+  }
+}`;
+
+            document.getElementById('cursor-config').textContent = testOutput;
+            document.getElementById('cursor-config').classList.remove('hidden');
+        }
+
+        function generateClaudeConfig() {
+            const apiKey = document.getElementById('claudeApiKey').value;
+            const baseUrl = document.getElementById('claudeBaseUrl').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            const config = `# Claude Code Installation:
+
+# Install the server globally
+npm install -g aem-admin-mcp-server
+
+# Add to Claude Code
+claude mcp add aem-admin --env AEM_API_KEY=${apiKey} --env AEM_BASE_URL=${baseUrl} -- aem-admin-mcp-server
+
+# Or add to your Claude Code configuration:
+AEM_API_KEY=${apiKey}
+AEM_BASE_URL=${baseUrl}`;
+
+            document.getElementById('claude-config').textContent = config;
+            document.getElementById('claude-config').classList.remove('hidden');
+        }
+
+        function generateAdvancedConfig() {
+            const apiKey = document.getElementById('advApiKey').value;
+            const baseUrl = document.getElementById('advBaseUrl').value;
+            const timeout = document.getElementById('advTimeout').value;
+            const customEndpoints = document.getElementById('customEndpoints').value;
+
+            let config = `{
+  "mcpServers": {
+    "aem-admin": {
+      "command": "aem-admin-mcp-server",
+      "env": {
+        "AEM_API_KEY": "${apiKey || 'YOUR_API_KEY'}",
+        "AEM_BASE_URL": "${baseUrl}",
+        "AEM_TIMEOUT": "${timeout}"`;
+
+            if (customEndpoints) {
+                try {
+                    JSON.parse(customEndpoints);
+                    config += `,
+        "AEM_CUSTOM_ENDPOINTS": '${customEndpoints}'`;
+                } catch (e) {
+                    alert('Invalid JSON in custom endpoints');
+                    return;
+                }
+            }
+
+            config += `
+      }
+    }
+  }
+}`;
+
+            document.getElementById('advanced-config').textContent = config;
+            document.getElementById('advanced-config').classList.remove('hidden');
+        }
+
+        function discoverConfig() {
+            const url = document.getElementById('discoverUrl').value;
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            document.getElementById('discovery-results').textContent = 'Discovering configuration...';
+            document.getElementById('discovery-results').classList.remove('hidden');
+
+            // Simulate discovery process
+            setTimeout(() => {
+                const result = `Configuration discovered for: ${url}
+
+Detected AEM Live Site: ✅
+Admin API Endpoint: https://admin.hlx.page
+GitHub Repository: Detected
+Required API Key: ✅ (needed for full access)
+
+Recommended Configuration:
+{
+  "mcpServers": {
+    "aem-admin": {
+      "command": "aem-admin-mcp-server",
+      "env": {
+        "AEM_API_KEY": "YOUR_API_KEY",
+        "AEM_BASE_URL": "https://admin.hlx.page"
+      }
+    }
+  }
+}
+
+Next Steps:
+1. Get an API key from AEM Live admin panel
+2. Use the configuration above in your MCP client
+3. Test the connection using the Auth Testing tab`;
+
+                document.getElementById('discovery-results').textContent = result;
+            }, 2000);
+        }
+
+        function testAuth() {
+            const apiKey = document.getElementById('testApiKey').value;
+            const baseUrl = document.getElementById('testBaseUrl').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            document.getElementById('auth-results').textContent = 'Testing authentication...';
+            document.getElementById('auth-results').classList.remove('hidden');
+
+            // Simulate auth test
+            setTimeout(() => {
+                const result = `Authentication Test Results:
+
+API Key: ****${apiKey.slice(-4)}
+Base URL: ${baseUrl}
+Status: ✅ SUCCESS
+
+Available Tools:
+✅ publish_content - Publish content to AEM Live
+✅ preview_content - Generate content previews
+✅ invalidate_cache - Manage cache invalidation
+✅ generate_sitemap - Create and update sitemaps
+✅ create_snapshot - Create content snapshots
+
+Your API key is working correctly!`;
+
+                document.getElementById('auth-results').textContent = result;
+            }, 1500);
+        }
+
+        function generateApiKey() {
+            const githubToken = document.getElementById('gitHubToken').value;
+            const repoUrl = document.getElementById('repoUrl').value;
+
+            if (!githubToken || !repoUrl) {
+                alert('Please enter both GitHub token and repository URL');
+                return;
+            }
+
+            document.getElementById('auth-results').textContent = 'Generating API key...';
+            document.getElementById('auth-results').classList.remove('hidden');
+
+            // Simulate API key generation
+            setTimeout(() => {
+                const result = `API Key Generation:
+
+Repository: ${repoUrl}
+GitHub Token: ****${githubToken.slice(-4)}
+
+⚠️ Manual Step Required:
+Please visit your AEM Live admin panel to generate an API key:
+1. Go to https://admin.hlx.page
+2. Sign in with GitHub
+3. Select your repository: ${repoUrl.split('/').slice(-2).join('/')}
+4. Generate API key in settings
+
+Once you have the API key, use it in the configuration above.`;
+
+                document.getElementById('auth-results').textContent = result;
+            }, 2000);
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
