@@ -39,81 +39,80 @@
 
         body {
             font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: var(--spectrum-spacing-800);
-            line-height: 1.6;
-            background: var(--adobe-gray-100);
+            padding: var(--spectrum-spacing-600);
+            line-height: 1.7;
+            background: white;
             color: var(--adobe-gray-800);
-            font-weight: 400;
         }
         .container {
             background: white;
-            border-radius: var(--spectrum-corner-radius-300);
-            padding: var(--spectrum-spacing-800);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--adobe-gray-200);
+            padding: var(--spectrum-spacing-800) 0;
         }
         .header {
             text-align: center;
-            margin-bottom: var(--spectrum-spacing-800);
+            margin-bottom: var(--spectrum-spacing-1000);
+            padding-bottom: var(--spectrum-spacing-800);
+            border-bottom: 1px solid var(--adobe-gray-200);
         }
         .logo {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(45deg, var(--adobe-red) 0%, var(--adobe-blue) 100%);
-            border-radius: var(--spectrum-corner-radius-300);
+            width: 48px;
+            height: 48px;
+            background: var(--adobe-gray-900);
+            border-radius: 0;
             margin: 0 auto var(--spectrum-spacing-400);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
         }
         h1 {
             color: var(--adobe-gray-900);
             margin: 0;
-            font-weight: 700;
-            font-size: 2.5rem;
-            letter-spacing: -0.5px;
+            font-weight: 300;
+            font-size: 2rem;
+            letter-spacing: -1px;
         }
         .subtitle {
-            color: var(--adobe-gray-600);
-            margin: var(--spectrum-spacing-200) 0 0;
+            color: var(--adobe-gray-500);
+            margin: var(--spectrum-spacing-400) 0 0;
             font-weight: 400;
-            font-size: 1.125rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .tabs {
             display: flex;
-            border-bottom: 2px solid var(--adobe-gray-200);
-            margin-bottom: var(--spectrum-spacing-700);
+            border-bottom: 1px solid var(--adobe-gray-200);
+            margin-bottom: var(--spectrum-spacing-1000);
             overflow-x: auto;
-            gap: var(--spectrum-spacing-100);
+            justify-content: center;
         }
         .tab {
-            padding: var(--spectrum-spacing-400) var(--spectrum-spacing-600);
+            padding: var(--spectrum-spacing-500) 0;
+            margin: 0 var(--spectrum-spacing-600);
             cursor: pointer;
             border: none;
             background: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--adobe-gray-600);
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--adobe-gray-500);
             border-bottom: 2px solid transparent;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease, border-color 0.2s ease;
             white-space: nowrap;
-            border-radius: var(--spectrum-corner-radius-100) var(--spectrum-corner-radius-100) 0 0;
-            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .tab:hover {
-            color: var(--adobe-gray-800);
-            background: var(--adobe-gray-100);
+            color: var(--adobe-gray-700);
         }
         .tab.active {
-            color: var(--adobe-blue);
-            border-bottom-color: var(--adobe-blue);
-            background: white;
+            color: var(--adobe-gray-900);
+            border-bottom-color: var(--adobe-gray-900);
         }
         .tab-content {
             display: none;
@@ -152,58 +151,44 @@
             border-color: var(--adobe-gray-400);
         }
         .button {
-            background: var(--adobe-blue);
+            background: var(--adobe-gray-900);
             color: white;
             border: none;
-            padding: var(--spectrum-spacing-300) var(--spectrum-spacing-600);
-            border-radius: var(--spectrum-corner-radius-200);
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: var(--spectrum-spacing-400) var(--spectrum-spacing-700);
+            border-radius: 0;
+            font-size: 0.875rem;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spectrum-spacing-200);
+            transition: opacity 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: var(--spectrum-spacing-300) var(--spectrum-spacing-200);
         }
         .button:hover {
-            background: #0F5FBF;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(20, 115, 230, 0.3);
-        }
-        .button:active {
-            transform: translateY(0);
+            opacity: 0.8;
         }
         .button.secondary {
-            background: var(--adobe-gray-600);
+            background: transparent;
+            color: var(--adobe-gray-700);
+            border: 1px solid var(--adobe-gray-300);
         }
         .button.secondary:hover {
-            background: var(--adobe-gray-700);
-        }
-        .button.success {
-            background: #2D9D78;
-        }
-        .button.success:hover {
-            background: #268763;
-        }
-        .button.danger {
-            background: var(--adobe-red);
-        }
-        .button.danger:hover {
-            background: #E60000;
+            border-color: var(--adobe-gray-700);
+            color: var(--adobe-gray-900);
         }
         .output {
             background: var(--adobe-gray-100);
-            border: 1px solid var(--adobe-gray-300);
-            border-radius: var(--spectrum-corner-radius-200);
-            padding: var(--spectrum-spacing-500);
-            margin-top: var(--spectrum-spacing-500);
-            font-family: 'Source Code Pro', 'Monaco', 'Courier New', monospace;
-            font-size: 0.875rem;
+            border: none;
+            border-left: 2px solid var(--adobe-gray-300);
+            padding: var(--spectrum-spacing-600);
+            margin-top: var(--spectrum-spacing-600);
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
             white-space: pre-wrap;
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
-            color: var(--adobe-gray-800);
+            color: var(--adobe-gray-700);
+            line-height: 1.5;
         }
         .success {
             background: #E8F5E8;
@@ -226,17 +211,15 @@
             color: #0D47A1;
         }
         .step {
-            margin: var(--spectrum-spacing-600) 0;
-            padding: var(--spectrum-spacing-600);
-            background: var(--adobe-gray-100);
-            border-radius: var(--spectrum-corner-radius-200);
-            border-left: 4px solid var(--adobe-blue);
+            margin: var(--spectrum-spacing-800) 0;
+            padding: var(--spectrum-spacing-800) 0;
+            border-left: 2px solid var(--adobe-gray-200);
+            padding-left: var(--spectrum-spacing-600);
         }
         .step h3 {
             margin-top: 0;
             color: var(--adobe-gray-900);
-            font-weight: 600;
-            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 400;
         }
         .grid {
             display: grid;
@@ -285,14 +268,16 @@
         /* Typography improvements */
         h2 {
             color: var(--adobe-gray-900);
-            font-weight: 600;
-            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-bottom: var(--spectrum-spacing-400);
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-bottom: var(--spectrum-spacing-800);
+            letter-spacing: -0.5px;
         }
         h3 {
             color: var(--adobe-gray-800);
-            font-weight: 600;
-            font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 1.125rem;
+            margin-bottom: var(--spectrum-spacing-500);
         }
         p {
             color: var(--adobe-gray-700);
