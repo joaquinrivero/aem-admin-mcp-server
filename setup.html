@@ -307,12 +307,10 @@
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('quick-setup')">Quick Setup</button>
-            <button class="tab" onclick="showTab('config-finder')">Config Discovery</button>
-            <button class="tab" onclick="showTab('auth-test')">Auth Testing</button>
-            <button class="tab" onclick="showTab('cursor-install')">Cursor Install</button>
-            <button class="tab" onclick="showTab('claude-install')">Claude Install</button>
-            <button class="tab" onclick="showTab('advanced')">Advanced Setup</button>
+            <button class="tab active" onclick="showTab('quick-setup')">Setup</button>
+            <button class="tab" onclick="showTab('cursor-install')">Cursor</button>
+            <button class="tab" onclick="showTab('claude-install')">Claude</button>
+            <button class="tab" onclick="showTab('auth-test')">Test</button>
         </div>
 
         <!-- Quick Setup Tab -->
@@ -368,23 +366,6 @@
             </div>
         </div>
 
-        <!-- Config Discovery Tab -->
-        <div id="config-finder" class="tab-content">
-            <h2>Configuration Discovery</h2>
-            <p>Automatically discover AEM Live configuration from your site:</p>
-            <div class="info" style="margin-bottom: 1rem;">
-                <strong>💡 Tip:</strong> Use your live site URL to discover the correct org/site parameters for API calls
-            </div>
-
-            <div class="form-group">
-                <label for="discoverUrl">AEM Site URL to Analyze</label>
-                <input type="url" id="discoverUrl" placeholder="https://main--milo--adobecom.aem.page" />
-                <small>Site URL to analyze (not the admin API URL). Examples: https://main--milo--adobecom.aem.page</small>
-            </div>
-            <button class="button" onclick="discoverConfig()">Discover Configuration</button>
-
-            <div id="discovery-results" class="output hidden"></div>
-        </div>
 
         <!-- Auth Testing Tab -->
         <div id="auth-test" class="tab-content">
@@ -477,39 +458,6 @@
             <div id="claude-config" class="output hidden"></div>
         </div>
 
-        <!-- Advanced Setup Tab -->
-        <div id="advanced" class="tab-content">
-            <h2>Advanced Configuration</h2>
-
-            <div class="grid">
-                <div class="card">
-                    <h4>Environment Variables</h4>
-                    <div class="form-group">
-                        <label for="advApiKey">AEM_API_KEY</label>
-                        <input type="password" id="advApiKey" />
-                    </div>
-                    <div class="form-group">
-                        <label for="advBaseUrl">AEM_BASE_URL</label>
-                        <input type="url" id="advBaseUrl" value="https://admin.hlx.page" />
-                    </div>
-                    <div class="form-group">
-                        <label for="advTimeout">AEM_TIMEOUT (ms)</label>
-                        <input type="number" id="advTimeout" value="30000" />
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h4>Custom Endpoints</h4>
-                    <div class="form-group">
-                        <label for="customEndpoints">Additional Endpoints (JSON)</label>
-                        <textarea id="customEndpoints" rows="6" placeholder='{"custom_tool": "/api/custom"}'></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <button class="button" onclick="generateAdvancedConfig()">Generate Advanced Configuration</button>
-            <div id="advanced-config" class="output hidden"></div>
-        </div>
     </div>
 
     <script>
@@ -786,93 +734,7 @@ AEM_BASE_URL=${baseUrl}`;
             document.getElementById('claude-config').classList.remove('hidden');
         }
 
-        function generateAdvancedConfig() {
-            const apiKey = document.getElementById('advApiKey').value;
-            const baseUrl = document.getElementById('advBaseUrl').value;
-            const timeout = document.getElementById('advTimeout').value;
-            const customEndpoints = document.getElementById('customEndpoints').value;
 
-            let config = `{
-  "mcpServers": {
-    "aem-admin": {
-      "command": "aem-admin-mcp-server",
-      "env": {
-        "AEM_API_KEY": "${apiKey || 'YOUR_API_KEY'}",
-        "AEM_BASE_URL": "${baseUrl}",
-        "AEM_TIMEOUT": "${timeout}"`;
-
-            if (customEndpoints) {
-                try {
-                    JSON.parse(customEndpoints);
-                    config += `,
-        "AEM_CUSTOM_ENDPOINTS": '${customEndpoints}'`;
-                } catch (e) {
-                    alert('Invalid JSON in custom endpoints');
-                    return;
-                }
-            }
-
-            config += `
-      }
-    }
-  }
-}`;
-
-            document.getElementById('advanced-config').textContent = config;
-            document.getElementById('advanced-config').classList.remove('hidden');
-        }
-
-        function discoverConfig() {
-            const url = document.getElementById('discoverUrl').value;
-            if (!url) {
-                alert('Please enter a URL');
-                return;
-            }
-
-            document.getElementById('discovery-results').textContent = 'Discovering configuration...';
-            document.getElementById('discovery-results').classList.remove('hidden');
-
-            // Extract org and site from URL
-            const urlMatch = url.match(/https:\/\/(\w+)--(\w+)--(\w+)\.aem\.page/);
-            const [, branch, site, org] = urlMatch || ['', 'main', 'unknown', 'unknown'];
-
-            // Simulate discovery process
-            setTimeout(() => {
-                const result = `Configuration discovered for: ${url}
-
-Detected AEM Live Site: ✅
-Organization: ${org}
-Site Repository: ${site}
-Branch: ${branch}
-Admin API Endpoint: https://admin.hlx.page
-
-✅ Real-World Tested Configuration:
-{
-  "mcpServers": {
-    "aem-admin": {
-      "command": "node",
-      "args": ["/Users/rivero/ai/mcp/aem-authoring/build/index.js"],
-      "env": {
-        "AEM_API_KEY": "YOUR_API_KEY",
-        "AEM_BASE_URL": "https://admin.hlx.page"
-      }
-    }
-  }
-}
-
-🎯 For AI Assistant Commands:
-- "Publish page-name for ${org}/${site}"
-- "Create preview for page-name on ${org}/${site}"
-- "Generate sitemap for ${org}/${site}"
-
-Next Steps:
-1. Get an API key from AEM Live admin panel
-2. Use the configuration above in your MCP client
-3. Test with real commands using org="${org}" and site="${site}"`;
-
-                document.getElementById('discovery-results').textContent = result;
-            }, 2000);
-        }
 
         function testAuth() {
             const apiKey = document.getElementById('testApiKey').value;
