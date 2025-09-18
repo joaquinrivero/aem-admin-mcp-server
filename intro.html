@@ -47,9 +47,9 @@
 
         body {
             font-family: 'Adobe Clean', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--adobe-gray-800);
-            background: linear-gradient(135deg, var(--adobe-gray-100) 0%, white 100%);
+            background: white;
         }
 
         .hero {
@@ -58,181 +58,201 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: var(--spectrum-spacing-800);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: var(--spectrum-spacing-1000) var(--spectrum-spacing-600);
+            background: white;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 700px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: var(--spectrum-spacing-600);
-            letter-spacing: -1px;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: var(--spectrum-spacing-800);
+            letter-spacing: -2px;
+            color: var(--adobe-gray-900);
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            margin-bottom: var(--spectrum-spacing-800);
-            opacity: 0.95;
+            font-size: 1.125rem;
+            margin-bottom: var(--spectrum-spacing-1000);
+            color: var(--adobe-gray-600);
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
-            background: var(--adobe-red);
+            background: var(--adobe-gray-900);
             color: white;
             border: none;
-            padding: var(--spectrum-spacing-500) var(--spectrum-spacing-900);
-            border-radius: var(--spectrum-corner-radius-200);
-            font-size: 1.125rem;
-            font-weight: 600;
+            padding: var(--spectrum-spacing-500) var(--spectrum-spacing-800);
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: opacity 0.2s ease;
             text-decoration: none;
             display: inline-block;
-            margin: var(--spectrum-spacing-300);
-            box-shadow: 0 4px 16px rgba(255, 0, 0, 0.3);
+            margin: var(--spectrum-spacing-400) var(--spectrum-spacing-300);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.875rem;
         }
 
         .cta-button:hover {
-            background: #E60000;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4);
+            opacity: 0.8;
         }
 
         .cta-button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: none;
+            background: transparent;
+            color: var(--adobe-gray-700);
+            border: 1px solid var(--adobe-gray-300);
         }
 
         .cta-button.secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+            border-color: var(--adobe-gray-700);
+            color: var(--adobe-gray-900);
         }
 
         .section {
-            padding: var(--spectrum-spacing-1000) var(--spectrum-spacing-800);
-            max-width: 1200px;
+            padding: var(--spectrum-spacing-1000) var(--spectrum-spacing-600);
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .section h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--adobe-gray-900);
-            margin-bottom: var(--spectrum-spacing-700);
+            margin-bottom: var(--spectrum-spacing-1000);
             text-align: center;
-            font-weight: 600;
+            font-weight: 300;
+            letter-spacing: -1px;
         }
 
         .section h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: var(--adobe-gray-800);
-            margin-bottom: var(--spectrum-spacing-400);
-            font-weight: 600;
+            margin-bottom: var(--spectrum-spacing-600);
+            font-weight: 400;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spectrum-spacing-700);
-            margin: var(--spectrum-spacing-700) 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spectrum-spacing-800);
+            margin: var(--spectrum-spacing-1000) 0;
         }
 
         .card {
             background: white;
-            padding: var(--spectrum-spacing-700);
-            border-radius: var(--spectrum-corner-radius-300);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--adobe-gray-200);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: var(--spectrum-spacing-800);
+            border: none;
+            border-left: 2px solid var(--adobe-gray-200);
+            transition: border-color 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border-left-color: var(--adobe-blue);
         }
 
         .card h4 {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--adobe-gray-900);
-            margin-bottom: var(--spectrum-spacing-400);
-            font-weight: 600;
+            margin-bottom: var(--spectrum-spacing-500);
+            font-weight: 500;
+        }
+
+        .card p {
+            color: var(--adobe-gray-600);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .problem {
-            background: linear-gradient(135deg, #FFE8E8 0%, #FFF0F0 100%);
-            border-left: 4px solid var(--adobe-red);
+            border-left-color: var(--adobe-gray-400);
         }
 
         .solution {
-            background: linear-gradient(135deg, #E8F5E8 0%, #F0FFF0 100%);
-            border-left: 4px solid #2D9D78;
+            border-left-color: var(--adobe-blue);
         }
 
         .testimonial {
-            background: linear-gradient(135deg, var(--adobe-gray-100) 0%, white 100%);
             text-align: center;
-            padding: var(--spectrum-spacing-800);
-            margin: var(--spectrum-spacing-800) 0;
-            border-radius: var(--spectrum-corner-radius-300);
-            border-left: 4px solid var(--adobe-blue);
+            padding: var(--spectrum-spacing-1000) 0;
+            margin: var(--spectrum-spacing-1000) 0;
+            border-top: 1px solid var(--adobe-gray-200);
+            border-bottom: 1px solid var(--adobe-gray-200);
         }
 
         .testimonial blockquote {
-            font-size: 1.125rem;
-            font-style: italic;
-            color: var(--adobe-gray-700);
-            margin-bottom: var(--spectrum-spacing-400);
+            font-size: 1.5rem;
+            font-style: normal;
+            color: var(--adobe-gray-800);
+            margin-bottom: var(--spectrum-spacing-600);
+            font-weight: 300;
+            line-height: 1.4;
+            letter-spacing: -0.5px;
         }
 
         .testimonial cite {
-            color: var(--adobe-gray-600);
-            font-weight: 600;
+            color: var(--adobe-gray-500);
+            font-weight: 400;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .stats {
             text-align: center;
-            margin: var(--spectrum-spacing-800) 0;
+            margin: var(--spectrum-spacing-1000) 0;
+            display: flex;
+            justify-content: center;
+            gap: var(--spectrum-spacing-1000);
         }
 
         .stat {
-            display: inline-block;
-            margin: var(--spectrum-spacing-400);
             text-align: center;
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--adobe-blue);
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: var(--adobe-gray-900);
             display: block;
+            letter-spacing: -1px;
         }
 
         .stat-label {
-            color: var(--adobe-gray-600);
-            font-size: 0.875rem;
-            font-weight: 500;
+            color: var(--adobe-gray-500);
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: var(--spectrum-spacing-200);
         }
 
         .final-cta {
             text-align: center;
-            padding: var(--spectrum-spacing-1000);
-            background: var(--adobe-gray-900);
-            color: white;
+            padding: var(--spectrum-spacing-1000) var(--spectrum-spacing-600);
+            background: var(--adobe-gray-100);
+            margin-top: var(--spectrum-spacing-1000);
         }
 
         .final-cta h2 {
-            color: white;
+            color: var(--adobe-gray-900);
             margin-bottom: var(--spectrum-spacing-600);
+            font-weight: 300;
         }
 
         .final-cta p {
-            font-size: 1.125rem;
-            margin-bottom: var(--spectrum-spacing-700);
-            opacity: 0.9;
+            font-size: 1rem;
+            margin-bottom: var(--spectrum-spacing-800);
+            color: var(--adobe-gray-600);
         }
     </style>
 </head>
@@ -250,23 +270,12 @@
 
     <!-- PROBLEM SECTION -->
     <section class="section" id="story">
-        <h2>The AI IDE Integration Gap</h2>
+        <h2>Extend Adobe's Platform</h2>
 
-        <div class="grid">
-            <div class="card problem">
-                <h4>🤖 AI Agents Can't Access AEM</h4>
-                <p>Your Claude Code or Cursor AI can write code, review PRs, and manage files - but can't publish content, clear cache, or manage AEM Live operations.</p>
-            </div>
-
-            <div class="card problem">
-                <h4>🔌 No MCP Server for AEM</h4>
-                <p>Every other system has Model Context Protocol servers (databases, APIs, tools) - but AEM Live has been left out of the AI revolution.</p>
-            </div>
-
-            <div class="card problem">
-                <h4>🔄 Manual Context Switching</h4>
-                <p>You're building AI-powered development workflows, but still manually managing content deployment and cache invalidation.</p>
-            </div>
+        <div style="text-align: center; margin-bottom: var(--spectrum-spacing-1000);">
+            <p style="font-size: 1.125rem; color: var(--adobe-gray-600); max-width: 600px; margin: 0 auto;">
+                Adobe's AEM Live is incredibly powerful. Now connect it directly to your AI development workflow through the Model Context Protocol.
+            </p>
         </div>
 
         <div class="testimonial">
@@ -299,215 +308,106 @@
 
     <!-- FEATURES SECTION -->
     <section class="section">
-        <h2>What You Get</h2>
+        <h2>5 Tools for AI Agents</h2>
 
-        <div class="grid">
+        <div style="max-width: 600px; margin: 0 auto;">
             <div class="card">
-                <h4>🔗 MCP Integration</h4>
-                <p>Native Model Context Protocol server that plugs directly into Claude Code, Cursor AI, and any MCP-compatible AI agent.</p>
-                <strong style="color: #2D9D78;">✅ MCP 1.0 Compatible</strong>
+                <h4>Publish Content</h4>
+                <p>Deploy pages to Adobe AEM Live</p>
             </div>
 
             <div class="card">
-                <h4>🤖 AI Agent Tools</h4>
-                <p>5 powerful tools your AI agents can use: publish_content, preview_content, invalidate_cache, generate_sitemap, create_snapshot.</p>
-                <strong style="color: #2D9D78;">✅ All Tools Working</strong>
+                <h4>Generate Previews</h4>
+                <p>Test content before going live</p>
             </div>
 
             <div class="card">
-                <h4>📤 Autonomous Publishing</h4>
-                <p>AI agents can publish pages to AEM Live autonomously - perfect for automated content workflows and CI/CD pipelines.</p>
-                <strong style="color: #2D9D78;">✅ API Validated</strong>
+                <h4>Manage Cache</h4>
+                <p>Optimize Adobe's CDN performance</p>
             </div>
 
             <div class="card">
-                <h4>🔄 Smart Cache Management</h4>
-                <p>AI-driven cache invalidation based on content changes. Your agents understand when and what to refresh.</p>
-                <strong style="color: #2D9D78;">✅ Real-Time</strong>
+                <h4>Create Sitemaps</h4>
+                <p>Enhance SEO capabilities</p>
             </div>
 
             <div class="card">
-                <h4>🏗️ Developer-First Design</h4>
-                <p>Built by developers, for developers. TypeScript, proper validation, comprehensive logging, and enterprise-grade error handling.</p>
-                <strong style="color: var(--adobe-blue);">⚡ Production Ready</strong>
+                <h4>Create Snapshots</h4>
+                <p>Backup and version content</p>
             </div>
+        </div>
 
-            <div class="card">
-                <h4>🧪 Battle-Tested</h4>
-                <p>Validated against actual AEM Live APIs with adobecom/milo. Every endpoint tested with real authentication and data.</p>
-                <strong style="color: var(--adobe-blue);">🎯 Adobe Verified</strong>
-            </div>
+        <div style="text-align: center; margin-top: var(--spectrum-spacing-800);">
+            <p style="color: var(--adobe-gray-500); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px;">
+                All tools verified working with Adobe's API
+            </p>
         </div>
     </section>
 
-    <!-- TRANSFORMATION SECTION -->
+    <!-- SIMPLE DEMO SECTION -->
     <section class="section">
-        <h2>Transform Your AI Development Stack</h2>
+        <h2>See It in Action</h2>
 
-        <div style="text-align: center; margin: var(--spectrum-spacing-800) 0;">
-            <h3 style="color: var(--adobe-blue); margin-bottom: var(--spectrum-spacing-600);">Before: Incomplete AI Workflows</h3>
-            <div class="card problem" style="max-width: 700px; margin: 0 auto var(--spectrum-spacing-700);">
-                <p>🤖 <strong>AI Agent:</strong> "I've written the perfect landing page component"</p>
-                <p>👤 <strong>Developer:</strong> "Amazing! Now let me deploy this to Adobe's AEM Live..."</p>
-                <p>1️⃣ Switch to AEM Live admin</p>
-                <p>2️⃣ Find the right publish options</p>
-                <p>3️⃣ Fill forms with technical details</p>
-                <p>4️⃣ Manually clear cache</p>
-                <p>5️⃣ Generate sitemap for SEO</p>
-                <p><strong>AI workflow broken: Manual handoff required</strong></p>
-            </div>
-
-            <div style="font-size: 2rem; color: var(--adobe-blue); margin: var(--spectrum-spacing-600);">⬇️</div>
-
-            <h3 style="color: #2D9D78; margin-bottom: var(--spectrum-spacing-600);">After: Complete AI Automation</h3>
-            <div class="card solution" style="max-width: 700px; margin: 0 auto;">
-                <p>🤖 <strong>AI Agent:</strong> "I've written the component and published it to AEM Live"</p>
-                <p>🤖 <strong>AI Agent:</strong> "Cache refreshed and sitemap updated for SEO"</p>
-                <p>🤖 <strong>AI Agent:</strong> "Preview available at: [URL]. Ready for review!"</p>
-                <p><strong>Complete AI workflow: Code → Deploy → Optimize</strong></p>
+        <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+            <div style="background: var(--adobe-gray-100); padding: var(--spectrum-spacing-800); border-radius: var(--spectrum-corner-radius-200); font-family: 'Source Code Pro', monospace; font-size: 0.95rem; text-align: left;">
+                <p style="color: var(--adobe-gray-600); margin-bottom: var(--spectrum-spacing-400);">// Your AI conversation</p>
+                <p><strong style="color: var(--adobe-blue);">You:</strong> "Publish the landing page to adobecom/milo"</p>
+                <p><strong style="color: #2D9D78;">AI:</strong> "✅ Published to Adobe AEM Live"</p>
+                <p><strong style="color: #2D9D78);">AI:</strong> "✅ Cache optimized"</p>
+                <p><strong style="color: #2D9D78;">AI:</strong> "✅ Ready at: main--milo--adobecom.aem.page"</p>
             </div>
         </div>
 
         <div class="stats">
             <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">AI Workflow</span>
-            </div>
-            <div class="stat">
                 <span class="stat-number">5</span>
-                <span class="stat-label">MCP Tools</span>
+                <span class="stat-label">Tools</span>
             </div>
             <div class="stat">
-                <span class="stat-number">∞</span>
-                <span class="stat-label">Possibilities</span>
+                <span class="stat-number">1</span>
+                <span class="stat-label">Conversation</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">0</span>
+                <span class="stat-label">Manual Steps</span>
             </div>
         </div>
     </section>
 
-    <!-- GUIDE SECTION -->
+    <!-- SIMPLE SETUP SECTION -->
     <section class="section">
-        <h2>We'll Guide You Every Step</h2>
+        <h2>Get Started</h2>
 
-        <div class="grid">
-            <div class="card">
-                <h4>📋 Step 1: Setup</h4>
-                <p>Our guided setup tool walks you through getting your API key and configuring your AI assistant. Takes 2 minutes.</p>
-            </div>
+        <div style="text-align: center;">
+            <div style="max-width: 500px; margin: 0 auto;">
+                <p style="color: var(--adobe-gray-600); margin-bottom: var(--spectrum-spacing-800);">
+                    Add to your AI IDE in 2 minutes. Works with Claude Code, Cursor AI, and any MCP-compatible assistant.
+                </p>
 
-            <div class="card">
-                <h4>🧪 Step 2: Test</h4>
-                <p>Built-in testing ensures everything works before you start. We verify each tool with real API calls.</p>
-            </div>
-
-            <div class="card">
-                <h4>🚀 Step 3: Launch</h4>
-                <p>Start managing AEM content through natural conversation. Your AI becomes your content management partner.</p>
+                <a href="setup.html" class="cta-button" style="background: var(--adobe-gray-900);">
+                    Add to AI IDE
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- SOCIAL PROOF SECTION -->
-    <section class="section">
-        <h2>For Developers Who Build with AI</h2>
-
-        <div class="testimonial">
-            <blockquote>"Adobe's commitment to developer experience shines through AEM Live. This MCP integration takes it to the next level - my AI agents can now leverage Adobe's powerful platform directly."</blockquote>
-            <cite>— Adobe Senior Developer</cite>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h4>🎯 AI IDE Integration</h4>
-                <p>Purpose-built for Claude Code, Cursor AI, and modern AI development environments. Native MCP protocol support.</p>
-            </div>
-
-            <div class="card">
-                <h4>🔧 Developer Experience</h4>
-                <p>TypeScript-first, comprehensive validation, detailed logging, and error handling that actually helps debug issues.</p>
-            </div>
-
-            <div class="card">
-                <h4>🚀 Production Validated</h4>
-                <p>Battle-tested with real Adobe projects. Every tool verified against actual AEM Live API endpoints and authentication.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAILURE STAKES SECTION -->
-    <section class="section" style="background: var(--adobe-gray-100); border-radius: var(--spectrum-corner-radius-300); padding: var(--spectrum-spacing-800);">
-        <h2 style="color: var(--adobe-red);">Don't Let This Continue...</h2>
-
-        <div class="grid">
-            <div class="card problem">
-                <h4>🤖 Incomplete AI Agents</h4>
-                <p>Your AI agents can code but can't deploy. They understand your project but can't manage the live environment. The workflow breaks at the deployment step.</p>
-            </div>
-
-            <div class="card problem">
-                <h4>🔌 Opportunity for Integration</h4>
-                <p>Adobe's AEM Live is a powerful platform, and now we can extend its capabilities by adding MCP server integration for AI development workflows.</p>
-            </div>
-
-            <div class="card problem">
-                <h4>🚀 Unlock Full Potential</h4>
-                <p>Adobe's AEM Live has incredible capabilities. Adding AI integration allows you to build the fastest, most automated development workflows possible.</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: var(--spectrum-spacing-700);">
-            <p style="font-size: 1.125rem; color: var(--adobe-gray-700);"><strong>Extend Adobe's excellent platform with AI superpowers...</strong></p>
-        </div>
-    </section>
-
-    <!-- SUCCESS VISION SECTION -->
-    <section class="section">
-        <h2>Complete AI Development Workflows</h2>
-
-        <div class="card solution" style="max-width: 900px; margin: 0 auto; text-align: center; padding: var(--spectrum-spacing-800);">
-            <h3 style="color: #2D9D78; margin-bottom: var(--spectrum-spacing-600);">Real AI Agent Conversation</h3>
-
-            <div style="text-align: left; background: #f8f9fa; padding: var(--spectrum-spacing-600); border-radius: var(--spectrum-corner-radius-200); margin: var(--spectrum-spacing-500) 0; font-family: 'Source Code Pro', monospace; font-size: 0.9rem;">
-                <p><strong>👤 Developer:</strong> "Build a new landing page component for our product launch"</p>
-                <p><strong>🤖 Claude/Cursor:</strong> "Creating React component with TypeScript...</p>
-                <p style="margin-left: 2rem;">✅ Component built: ProductLanding.tsx</p>
-                <p style="margin-left: 2rem;">✅ Tests added and passing</p>
-                <p style="margin-left: 2rem;">✅ Published to Adobe AEM Live: adobecom/milo/main/en/products</p>
-                <p style="margin-left: 2rem;">✅ Cache optimized for Adobe's CDN</p>
-                <p style="margin-left: 2rem;">✅ Preview generated on Adobe's platform: [preview-url]</p>
-                <p style="margin-left: 2rem;">✅ Sitemap updated leveraging Adobe's SEO capabilities</p>
-                <p style="margin-left: 2rem;">✅ Snapshot created using Adobe's versioning: 'pre-launch-backup'</p>
-                <p><strong>🤖 Claude/Cursor:</strong> "Complete! Your content is live on Adobe's world-class platform."</p>
-                <br>
-                <p><strong>👤 Developer:</strong> "Perfect! Show me the analytics integration next"</p>
-                <p><strong>🤖 Claude/Cursor:</strong> "Building analytics component now..."</p>
-            </div>
-
-            <p style="font-size: 1.125rem; color: var(--adobe-gray-700); margin-top: var(--spectrum-spacing-600);">
-                <strong>From idea to live deployment: One conversation.</strong><br>
-                <em>Your AI agent leverages Adobe's powerful platform for complete automation.</em>
-            </p>
-        </div>
-    </section>
 
     <!-- FINAL CTA SECTION -->
     <section class="final-cta">
-        <h2>Complete Your AI Development Stack</h2>
-        <p>Join developers building the future of AI-powered workflows. Add AEM Live integration to your Claude Code or Cursor AI today.</p>
+        <h2>Add to Your AI IDE</h2>
+        <p>Model Context Protocol server for Adobe AEM Live integration.</p>
 
-        <div style="margin: var(--spectrum-spacing-700) 0;">
-            <a href="setup.html" class="cta-button" style="background: var(--adobe-red); margin-right: var(--spectrum-spacing-400);">
-                🔌 Add MCP Server
+        <div style="margin: var(--spectrum-spacing-800) 0;">
+            <a href="setup.html" class="cta-button" style="background: var(--adobe-gray-900);">
+                Setup Guide
             </a>
             <a href="https://github.com/joaquinrivero/aem-admin-mcp-server" class="cta-button secondary">
-                📖 GitHub Repository
+                View Source
             </a>
         </div>
 
-        <div style="margin-top: var(--spectrum-spacing-700); font-size: 0.875rem; opacity: 0.8;">
-            <p>✅ Model Context Protocol 1.0 compatible</p>
-            <p>✅ Claude Code & Cursor AI ready</p>
-            <p>✅ Production-tested with Adobe projects</p>
-            <p>✅ TypeScript, validation, enterprise logging</p>
+        <div style="margin-top: var(--spectrum-spacing-700); color: var(--adobe-gray-500); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">
+            <p>Claude Code • Cursor AI • MCP Compatible</p>
         </div>
     </section>
 
@@ -522,27 +422,20 @@
             });
         });
 
-        // Add subtle animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Minimal fade-in for sections
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.2 });
 
-        // Observe all cards for animation
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        // Observe sections for subtle fade-in
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transition = 'opacity 1s ease';
+            observer.observe(section);
         });
     </script>
 </body>
