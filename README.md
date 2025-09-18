@@ -15,7 +15,7 @@ Connect your AI assistant (Claude Code or Cursor AI) directly to Adobe Experienc
 ## Quick Start
 
 ### Step 1: Get Your API Key
-Use our [Universal Setup Tool](setup.html) to get your AEM API key and test the connection.
+Use our [Universal Setup Tool](https://joaquinrivero.github.io/aem-admin-mcp-server/) to get your AEM API key and test the connection.
 
 > **💡 Tip**: The setup tool includes authentication testing to verify your API key works before configuration.
 
@@ -28,7 +28,7 @@ claude mcp add aem-admin --env AEM_API_KEY=YOUR_API_KEY --env AEM_BASE_URL=https
 ```
 
 **For Cursor AI:**
-1. Open the [Universal Setup Tool](setup.html)
+1. Open the [Universal Setup Tool](https://joaquinrivero.github.io/aem-admin-mcp-server/)
 2. Enter your AEM API Key
 3. Click "📱 Add to Cursor (One-Click)" to automatically configure Cursor
 4. Cursor will open and prompt you to add the MCP server
@@ -96,13 +96,13 @@ Ask your AI: *"Create a backup snapshot named 'pre-release-backup' for adobecom/
 ## What You Need
 
 - **AEM Live Access**: Your organization must have AEM Live with Admin API enabled
-- **API Key**: Get this from your AEM administrator or use our [setup tool](setup.html)
+- **API Key**: Get this from your AEM administrator or use our [setup tool](https://joaquinrivero.github.io/aem-admin-mcp-server/)
 - **AI Assistant**: Claude Code or Cursor AI (both supported)
 
 ## Troubleshooting
 
 ### "API Key Invalid" or "Unauthorized" Error
-- **✅ Solution**: Use the [setup tool](setup.html) to test your API key first
+- **✅ Solution**: Use the [setup tool](https://joaquinrivero.github.io/aem-admin-mcp-server/) to test your API key first
 - **✅ Verified**: API key must use `Authorization: token YOUR_KEY` header format
 - **✅ Tip**: Ensure your API key has `admin` or appropriate roles
 
@@ -156,7 +156,7 @@ If you need to customize the connection settings, you can modify these environme
 A: Currently optimized for Claude Code and Cursor AI, but other MCP-compatible assistants should work.
 
 **Q: What if I don't have an API key?**
-A: Contact your AEM administrator or use our [setup tool](setup.html) to generate one.
+A: Contact your AEM administrator or use our [setup tool](https://joaquinrivero.github.io/aem-admin-mcp-server/) to generate one.
 
 **Q: Can I publish multiple pages at once?**
 A: Yes! Ask your AI: "Publish all pages in /en/products for adobecom/milo"
@@ -166,11 +166,11 @@ A: Yes, all communication uses HTTPS and your API key is stored securely on your
 
 ### Need More Help?
 
-- **Setup Issues**: Use our [Universal Setup Tool](setup.html) for guided configuration
+- **Setup Issues**: Use our [Universal Setup Tool](https://joaquinrivero.github.io/aem-admin-mcp-server/) for guided configuration
 - **Technical Problems**: Check the troubleshooting section above
 - **Feature Requests**: Open an issue in the repository
 - **General Questions**: Contact your AEM administrator
 
 ---
 
-**Ready to get started?** Use our [Universal Setup Tool](setup.html) to set up your API key and start managing AEM content with your AI assistant!
+**Ready to get started?** Use our [Universal Setup Tool](https://joaquinrivero.github.io/aem-admin-mcp-server/) to set up your API key and start managing AEM content with your AI assistant!
