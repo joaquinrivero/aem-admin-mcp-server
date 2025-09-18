@@ -15,7 +15,8 @@ export async function invalidateCache(
   });
 
   // Build the correct AEM Live admin API endpoint
-  const endpoint = `/cache/${args.org}/${args.site}/${args.ref}/${args.path}`;
+  const cleanPath = args.path.startsWith('/') ? args.path.slice(1) : args.path;
+  const endpoint = `/cache/${args.org}/${args.site}/${args.ref}/${cleanPath}`;
 
   const response = await httpClient.post(endpoint);
 

@@ -4,16 +4,20 @@ Connect your AI assistant (Claude Code or Cursor AI) directly to Adobe Experienc
 
 ## What You Can Do
 
-- **📤 Publish Content**: Deploy your pages to AEM Live instantly
-- **👀 Preview Changes**: Test your content before going live
-- **🔄 Refresh Cache**: Clear cache to show latest updates
-- **🗺️ Generate Sitemaps**: Create site maps for better SEO
-- **💾 Create Backups**: Save snapshots of your content
+- **📤 Publish Content**: Deploy your pages to AEM Live instantly ✅ **Tested & Working**
+- **👀 Preview Changes**: Test your content before going live ✅ **Tested & Working**
+- **🔄 Refresh Cache**: Clear cache to show latest updates ✅ **Tested & Working**
+- **🗺️ Generate Sitemaps**: Create site maps for better SEO ✅ **Tested & Working**
+- **💾 Create Backups**: Save snapshots of your content ✅ **Tested & Working**
+
+> **🧪 Real-World Tested**: All features verified working with actual AEM Live API and adobecom/milo project.
 
 ## Quick Start
 
 ### Step 1: Get Your API Key
 Use our [Universal Setup Tool](setup.html) to get your AEM API key and test the connection.
+
+> **💡 Tip**: The setup tool includes authentication testing to verify your API key works before configuration.
 
 ### Step 2: Install for Your AI Assistant
 
@@ -31,10 +35,11 @@ claude mcp add aem-admin --env AEM_API_KEY=YOUR_API_KEY --env AEM_BASE_URL=https
 
 ### Step 3: Start Using It!
 Just ask your AI assistant to help with AEM tasks:
-- "Publish the /en/products page for adobecom/milo"
-- "Create a preview for /en/products on adobecom/milo"
-- "Generate a sitemap for adobecom/milo"
-- "Create a backup snapshot for adobecom/milo"
+- "Publish the drafts/rivero/how-to page for adobecom/milo" ✅ **Tested Working**
+- "Create a preview for drafts/rivero/how-to on adobecom/milo" ✅ **Tested Working**
+- "Invalidate cache for drafts/rivero/how-to on adobecom/milo" ✅ **Tested Working**
+- "Generate a sitemap for adobecom/milo" ✅ **Tested Working**
+- "Create a backup snapshot named 'my-backup' for adobecom/milo" ✅ **Tested Working**
 
 ## How It Works
 
@@ -96,33 +101,41 @@ Ask your AI: *"Create a backup snapshot named 'pre-release-backup' for adobecom/
 
 ## Troubleshooting
 
-### "API Key Invalid" Error
-- Double-check your API key in the [setup tool](setup.html)
-- Ensure your organization has AEM Live Admin API access
-- Contact your AEM administrator if needed
+### "API Key Invalid" or "Unauthorized" Error
+- **✅ Solution**: Use the [setup tool](setup.html) to test your API key first
+- **✅ Verified**: API key must use `Authorization: token YOUR_KEY` header format
+- **✅ Tip**: Ensure your API key has `admin` or appropriate roles
 
-### "Page Not Found" Error
-- Verify the organization name (e.g., "adobecom")
-- Check the site repository name (e.g., "milo")
-- Confirm the page path exists (e.g., "/en/products")
+### "Page Not Found" or "Bad Request" Error
+- **✅ Verified**: Use correct format: `org: "adobecom", site: "milo", path: "drafts/page"`
+- **✅ Important**: Don't include leading slash in path (use `"drafts/page"` not `"/drafts/page"`)
+- **✅ Tested**: Organization and site names must match your AEM Live setup
 
-### Cache Issues
-- Publishing content automatically refreshes cache
-- If cache problems persist, try publishing the page again
-- Use the cache invalidation tool as a last resort
+### Cache and Performance
+- **✅ Confirmed**: Publishing content automatically refreshes cache
+- **✅ Working**: Direct cache invalidation tool now functional
+- **✅ Tested**: Both methods work for cache management
+
+### Build Issues
+- **✅ Required**: Run `npm install && npm run build` before using
+- **✅ Environment**: Create `.env` file with your `AEM_API_KEY`
+- **✅ Dependencies**: Node.js 18+ required
 
 ## Tips for Better Results
 
 ### Be Specific
 ✅ **Good**: "Publish the /en/products page for adobecom/milo"
+
 ❌ **Vague**: "Publish something"
 
 ### Include Context
 ✅ **Good**: "Create a preview for /en/products on adobecom/milo main branch"
+
 ❌ **Missing**: "Create preview"
 
 ### Use Natural Language
 ✅ **Good**: "Generate a sitemap for adobecom/milo"
+
 ❌ **Technical**: "Execute generate_sitemap with org=adobecom, site=milo"
 
 ## Advanced Configuration

@@ -15,9 +15,10 @@ export async function previewContent(
   });
 
   // Build the correct AEM Live admin API endpoint
-  const endpoint = `/preview/${args.org}/${args.site}/${args.ref}/${args.path}`;
+  const cleanPath = args.path.startsWith('/') ? args.path.slice(1) : args.path;
+  const endpoint = `/preview/${args.org}/${args.site}/${args.ref}/${cleanPath}`;
 
-  const response = await httpClient.post(endpoint);
+  const response = await httpClient.post(endpoint, undefined);
 
   if (!response.success) {
     logger.error('Failed to generate preview', { path: args.path, error: response.error });

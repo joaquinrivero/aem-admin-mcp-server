@@ -14,9 +14,10 @@ export class AemHttpClient {
     };
 
     if (this.config.apiKey) {
-      headers['Authorization'] = `Bearer ${this.config.apiKey}`;
+      // Use Authorization: token format as per AEM Live documentation
+      headers['Authorization'] = `token ${this.config.apiKey}`;
     } else if (this.config.authToken) {
-      headers['Authorization'] = `Token ${this.config.authToken}`;
+      headers['Authorization'] = `token ${this.config.authToken}`;
     }
 
     return headers;
@@ -36,27 +37,50 @@ export class AemHttpClient {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-      const response = await fetch(url, {
+      const requestOptions: RequestInit = {
         method,
         headers: this.getHeaders(),
-        body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal
-      });
+      };
+
+      // Only add body and Content-Type if we actually have data to send
+      if (body !== undefined && body !== null) {
+        requestOptions.body = JSON.stringify(body);
+      } else {
+        // Remove Content-Type for requests without body
+        const headers = { ...requestOptions.headers };
+        delete (headers as any)['Content-Type'];
+        requestOptions.headers = headers;
+      }
+
+      const response = await fetch(url, requestOptions);
 
       clearTimeout(timeoutId);
 
-      const responseData = await response.json();
+      const contentType = response.headers.get('content-type');
+      let responseData;
+
+      if (contentType && contentType.includes('application/json')) {
+        responseData = await response.json();
+      } else {
+        // Handle non-JSON responses (HTML, plain text, etc.)
+        const textResponse = await response.text();
+        responseData = { message: textResponse, raw: textResponse };
+      }
 
       if (!response.ok) {
         logger.error('AEM API request failed', {
+          url,
+          method,
           status: response.status,
           statusText: response.statusText,
+          headers: Object.fromEntries(response.headers.entries()),
           data: responseData
         });
 
         return {
           success: false,
-          error: responseData.message || response.statusText
+          error: responseData.message || responseData.raw || response.statusText
         };
       }
 

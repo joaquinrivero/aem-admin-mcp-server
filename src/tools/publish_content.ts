@@ -17,9 +17,10 @@ export async function publishContent(
   });
 
   // Build the correct AEM Live admin API endpoint
+  const cleanPath = args.path.startsWith('/') ? args.path.slice(1) : args.path;
   const endpoint = args.bulk
     ? `/live/${args.org}/${args.site}/${args.ref}/*`
-    : `/live/${args.org}/${args.site}/${args.ref}/${args.path}`;
+    : `/live/${args.org}/${args.site}/${args.ref}/${cleanPath}`;
 
   const body = args.bulk ? { paths: [args.path] } : {};
 

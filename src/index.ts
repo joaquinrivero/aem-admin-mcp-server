@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
+import dotenv from 'dotenv';
 import { createServer } from './server.js';
 import { logger } from '@/utils/logger.js';
+
+// Load environment variables from .env file
+dotenv.config();
 
 async function main() {
   try {

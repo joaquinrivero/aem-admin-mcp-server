@@ -15,7 +15,8 @@ export async function generateSitemap(
   });
 
   // Build the correct AEM Live admin API endpoint
-  const endpoint = `/sitemap/${args.org}/${args.site}/${args.ref}${args.path ? `/${args.path}` : ''}`;
+  const cleanPath = args.path ? (args.path.startsWith('/') ? args.path.slice(1) : args.path) : '';
+  const endpoint = `/sitemap/${args.org}/${args.site}/${args.ref}${cleanPath ? `/${cleanPath}` : ''}`;
 
   const response = await httpClient.post(endpoint);
 
